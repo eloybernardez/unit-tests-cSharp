@@ -103,5 +103,51 @@
             // Assert
             Assert.Equal(12, result);
         }
+
+        [Theory]
+        [InlineData("IV", 4)]
+        [InlineData("V", 5)]
+        [InlineData("X", 10)]
+        public void FromRomanToNumber(string romanNumber, int expected)
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+
+            // Act
+            var result = strOperations.FromRomanToNumber(romanNumber);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        // Rehaciendo test con Thery e InlineData
+        [Theory]
+        [InlineData("oso")]
+        [InlineData("carro")]
+        public void IsPalindrome(string word)
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+
+            // Act
+            bool result = strOperations.IsPalindrome(word);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Theory]
+        [InlineData("gato", 15)]
+        public void QuantityInWordsTheory(string word, int amount)
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+
+            // Act
+            string result = strOperations.QuantintyInWords(word, amount);
+
+            // Assert
+            Assert.Equal("quince gatos", result);
+        }
     }
 }
