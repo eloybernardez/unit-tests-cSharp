@@ -1,4 +1,7 @@
-﻿namespace StringManipulation.Tests
+﻿using Microsoft.Extensions.Logging;
+using Moq;
+
+namespace StringManipulation.Tests
 {
     public class StringOperationsTests
     {
@@ -148,6 +151,36 @@
 
             // Assert
             Assert.Equal("quince gatos", result);
+        }
+
+        [Fact]
+        public void CountOccurrences()
+        {
+            // Arrange
+            Mock<ILogger<StringOperations>> mockLogger = new Mock<ILogger<StringOperations>>();
+            var strOperations = new StringOperations(mockLogger.Object);
+
+            // Act
+            int result = strOperations.CountOccurrences("Hello Platzi", 'l');
+
+            // Assert
+            Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void ReadFile()
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+            Mock<IFileReaderConector> mockFileReader = new Mock<IFileReaderConector>();
+            // Como el método ReadString retorna un string, debemos usar el método Setup para indicar que queremos que retorne un valor específico
+            mockFileReader.Setup(p => p.ReadString(It.IsAny<string>())).Returns("Reading file"); // It.IsAny<string>() es un comodín que indica que no importa el valor que se le pase, siempre retornará "Reading file"
+
+            // Act
+            var result = strOperations.ReadFile(mockFileReader.Object, "file.txt");
+
+            // Assert
+            Assert.Equal("Reading file", result);
         }
     }
 }

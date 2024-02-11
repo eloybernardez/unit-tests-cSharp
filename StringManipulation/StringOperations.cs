@@ -76,7 +76,7 @@ namespace StringManipulation
                 }
             }
 
-            _logger.LogInformation($"Number of concurrecies is:{count}");
+            _logger.LogInformation($"Number of concurrecies is: {count}");
             return count;
         }
 
