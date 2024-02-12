@@ -126,7 +126,7 @@ namespace StringManipulation.Tests
         // Rehaciendo test con Thery e InlineData
         [Theory]
         [InlineData("oso")]
-        [InlineData("carro")]
+        [InlineData("ama")]
         public void IsPalindrome(string word)
         {
             // Arrange
@@ -182,5 +182,32 @@ namespace StringManipulation.Tests
             // Assert
             Assert.Equal("Reading file", result);
         }
+
+        [Theory]
+        [InlineData("", 3, "")]
+        [InlineData("sapos", 9, "sapos")]
+        [InlineData("carro", 3, "car")]
+        public void TruncateString(string input, int maxLength, string expected)
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+
+            // Act
+            string result = strOperations.TruncateString(input, maxLength);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void TruncateString_Exception()
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+
+            // Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => strOperations.TruncateString("Hello", 0));
+        }
     }
 }
+
