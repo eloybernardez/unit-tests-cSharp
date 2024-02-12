@@ -5,7 +5,7 @@ namespace StringManipulation.Tests
 {
     public class StringOperationsTests
     {
-        [Fact(Skip = "Esta prueba no es válida en este momento. Hacer un ticket para justificar")]
+        [Fact] //(Skip = "Esta prueba no es válida en este momento. Hacer un ticket para justificar")]
         public void ConcatenateStrings()
         {
             // Arrange
@@ -207,6 +207,32 @@ namespace StringManipulation.Tests
 
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => strOperations.TruncateString("Hello", 0));
+        }
+
+        [Fact]
+        public void Pluralize()
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+
+            // Act
+            string result = strOperations.Pluralize("perro");
+
+            // Assert
+            Assert.Equal("perros", result);
+        }
+
+        [Fact]
+        public void ReverseString()
+        {
+            // Arrange
+            var strOperations = new StringOperations();
+
+            // Act
+            string result = strOperations.ReverseString("Hello Platzi");
+
+            // Assert
+            Assert.Equal("iztalP olleH", result);
         }
     }
 }
